@@ -11,6 +11,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -46,11 +47,7 @@ public class GUI extends Application {
         plus1.setOnAction((ActionEvent e)->{
         addPassword1(main);
     });
-        try {
-            read1(plus1);
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        
         
         //+ Button2
         Button plus2 = new Button("Password2");
@@ -82,8 +79,42 @@ public class GUI extends Application {
         addPassword4(main);
     });
         
+        //Refresh Button
+        Button refresh = new Button("Refresh");
+        refresh.setFont(Font.font("Helvetica",25));
+        refresh.setShape(new Rectangle(10,10));
+        main.add(refresh,0, 5);
+        
+        refresh.setOnAction((ActionEvent e)->{
+        
+            try {
+            read1(plus1,main);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            
+            try {
+            read2(plus2,main);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            
+            try {
+            read3(plus3,main);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            
+            try {
+            read4(plus4,main);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            
+    });
+        
         //Adding Scene
-        Scene scene = new Scene(main, 600 , 500);
+        Scene scene = new Scene(main, 600 , 600);
         primaryStage.setScene(scene);
         primaryStage.setTitle("Password Manager");
         primaryStage.show();
@@ -278,7 +309,7 @@ public class GUI extends Application {
         
     }
     
-    public void read1(Button button) throws FileNotFoundException{
+    public void read1(Button button,GridPane pane ) throws FileNotFoundException{
             File x = new File("passwords1.txt");
             Scanner y = new Scanner(x);
             String s1 = null;
@@ -288,6 +319,61 @@ public class GUI extends Application {
                  s2 = y.nextLine();
         }
             button.setText(s1);
+            TextField pass = new TextField(s2);
+            pass.setPrefWidth(135);
+            pass.setMaxWidth(135);
+            pane.add(pass, 0, 25);
+            
+        }
+    
+    public void read2(Button button,GridPane pane) throws FileNotFoundException{
+            File x = new File("passwords2.txt");
+            Scanner y = new Scanner(x);
+            String s1 = null;
+            String s2 = null;
+            while(y.hasNext()){
+                 s1 = y.nextLine();
+                 s2 = y.nextLine();
+        }
+            button.setText(s1);
+            TextField pass = new TextField(s2);
+            pass.setPrefWidth(135);
+            pass.setMaxWidth(135);
+            pane.add(pass, 1, 25);
+            
+        }
+    
+    public void read3(Button button,GridPane pane) throws FileNotFoundException{
+            File x = new File("passwords3.txt");
+            Scanner y = new Scanner(x);
+            String s1 = null;
+            String s2 = null;
+            while(y.hasNext()){
+                 s1 = y.nextLine();
+                 s2 = y.nextLine();
+        }
+            button.setText(s1);
+            TextField pass = new TextField(s2);
+            pass.setPrefWidth(135);
+            pass.setMaxWidth(135);
+            pane.add(pass, 0, 35);
+            
+        }
+    
+    public void read4(Button button,GridPane pane) throws FileNotFoundException{
+            File x = new File("passwords4.txt");
+            Scanner y = new Scanner(x);
+            String s1 = null;
+            String s2 = null;
+            while(y.hasNext()){
+                 s1 = y.nextLine();
+                 s2 = y.nextLine();
+        }
+            button.setText(s1);
+            TextField pass = new TextField(s2);
+            pass.setPrefWidth(135);
+            pass.setMaxWidth(135);
+            pane.add(pass, 1, 35);
             
         }
 }
